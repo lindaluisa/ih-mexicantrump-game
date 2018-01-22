@@ -33,8 +33,7 @@ function main() {
     startGameBtn.innerText = 'Start';
     landingElement.appendChild(startGameBtn);
 
-    // linking to html
-    gameWindowElement.appendChild(landingElement);
+    gameWindowElement.appendChild(landingElement); // linking to HTML
 
     startGameBtn.addEventListener('click', clickToStart);
   }
@@ -45,20 +44,19 @@ function main() {
   }
 
   ///* -------- GAME -------- *///
+
   function moveToGame() {
     stage = 'game';
     game = new Game(gameWindowElement);
 
-    window.setTimeout(function () {
-      leaveGame();
-      moveToGameOver();
-    }, 2000);
+    // window.setTimeout(function () {
+    //   leaveGame();
+    //   moveToGameOver();
+    // }, 5000);
   }
 
   function leaveGame() {
     game.destroy();
-    //@ask: why is remove not suitable here?
-    //e.g. canvas.Element.remove() 
   }
 
 
@@ -99,5 +97,4 @@ function main() {
 
 }
 
-window.onload = main;
-/* fired when the document's window is rdy for presentation */
+window.onload = main; // fired when document's window rdy for presentation
