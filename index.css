@@ -1,0 +1,73 @@
+
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+  
+body {
+  margin: 0;
+}
+
+
+/* ---- typography ---- */
+
+body {
+  background-color: white;
+}
+
+h1 {
+  color: black;
+  font-family: 'Frijole';
+  margin: 0px;
+  padding: 60px 0 0px 0;
+}
+
+h3 {
+  color: peru;
+  font-family: 'Londrina Sketch';
+  letter-spacing: 5px;
+  padding: 80px 0 30px 0;
+}
+
+button, btn {
+  background-color: white;
+  border-radius: 5px;
+  color: peru;
+  font-family: 'Londrina Sketch';
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding: 10px 25px;
+  text-transform: uppercase;
+}
+  
+btn {
+  padding: 60px 25px;
+}
+
+/* ---- layout ---- */
+
+#site-header {}
+
+#site-footer {}
+
+#site-main {}
+
+
+  
+/* ---- components ---- */
+
+#game-window {
+  text-align: center;
+}
+
+canvas {
+  border: solid black 1px;
+  background-color: antiquewhite;
+}
