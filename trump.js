@@ -24,7 +24,6 @@ Trump.prototype.moveRight = function() {
   trump.speedX +=1;
 }
 
-
 Trump.prototype.draw = function () {
   var self = this;
 

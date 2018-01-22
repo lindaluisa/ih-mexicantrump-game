@@ -35,7 +35,6 @@ function Game(gameWindowElement) {
     }
 
     // @todo remove items that are no longer in the screen from the items array
-
     // @todo detect collisions
 
 

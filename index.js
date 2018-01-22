@@ -8,7 +8,6 @@ function main() {
   var game;
 
   ///* -------- START GAME -------- *///
-
   var landingElement;
   var startGameBtn;
   var clickToStart = function () {
