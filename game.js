@@ -10,7 +10,9 @@ function Game(gameWindowElement) {
   self.finished = false; // when game executed, keep painting
   self.width = window.innerWidth;
   self.height = window.innerHeight;
-
+  // ---- score
+  self.score = 100;
+  
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
   self.canvasElement.height = self.height;
@@ -35,10 +37,12 @@ function Game(gameWindowElement) {
 
   document.addEventListener('keydown', self.controlKeyboard);
 
+
   self.items = [];
   function repaint() {
     // ----- logic
     self.trump.update();
+    
 
     self.frames += 1;
     if (self.frames % self.dropRate === 0) {
@@ -65,11 +69,15 @@ function Game(gameWindowElement) {
       if (collisionRightEdge && collisionLeftEdge && collisionDown && collisionTop) {
         self.trump.hasCollided(nthItem)
         nthItem.setCollided(); 
-        // score ++
+      
+      
+        self.score = self.score - 20;
       }
-  
     })
     
+    if (self.score <= 0) {
+      game.destroy();
+    };
 
     // ----- paint
 
@@ -81,6 +89,10 @@ function Game(gameWindowElement) {
     }
 
     // paint score
+    self.ctx.font = '35px Arial, sans-serif';
+    self.ctx.fillStyle = 'black';
+    self.ctx.fillText('Trump is Mexican to ',  10, 50);
+    self.ctx.fillText(self.score + " %",  120, 100);
 
     // paint the time left
 
@@ -92,7 +104,6 @@ function Game(gameWindowElement) {
   window.requestAnimationFrame(repaint);
 }
 
-
 Game.prototype.destroy = function () {
   var self = this;
   self.finished = true;
@@ -100,5 +111,5 @@ Game.prototype.destroy = function () {
   document.removeEventListener('keydown', self.controlKeyboard);
 };
 
-  // do score
-  // do game over
+
+  // @ todo do game over

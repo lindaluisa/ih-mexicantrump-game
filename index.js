@@ -48,10 +48,10 @@ function main() {
     stage = 'game';
     game = new Game(gameWindowElement);
 
-    // window.setTimeout(function () {
-    //   leaveGame();
-    //   moveToGameOver();
-    // }, 5000);
+    window.setTimeout(function () {
+      leaveGame();
+      moveToGameOver();
+    }, 5000);
   }
 
   function leaveGame() {
@@ -76,6 +76,10 @@ function main() {
     var title = document.createElement('h3');
     title.innerText = 'Try harder, Trump!';
     gameOverElement.appendChild(title);
+
+    var yourScore = document.createElement('h2');
+    yourScore.innerText = 'SCORE: ' + game.score + " %";
+    gameOverElement.appendChild(yourScore);
 
     playAgainBtn = document.createElement('button');
     playAgainBtn.innerText = 'Start again!';

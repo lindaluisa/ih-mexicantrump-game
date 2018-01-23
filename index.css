@@ -26,11 +26,16 @@ h1 {
   padding: 60px 0 0px 0;
 }
 
-h3 {
+h3, h2 {
   color: peru;
   font-family: 'Londrina Sketch';
   letter-spacing: 5px;
   padding: 80px 0 30px 0;
+}
+
+h2 {
+  color: black;
+  font-size: 25px;
 }
 
 button, btn {
