@@ -15,6 +15,7 @@ function main() {
     moveToGame();
   }
 
+  
   function landingPage(){
     stage = 'landing';
 

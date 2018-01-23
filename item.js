@@ -15,7 +15,6 @@ function Item (ctx, gameWidth, gameHeight, type) {
   self.y = -self.size
 } 
 
-
 Item.prototype.draw = function () {
   var self = this;
 
