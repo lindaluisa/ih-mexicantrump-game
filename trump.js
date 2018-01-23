@@ -16,6 +16,13 @@ function Trump (ctx, gameWidth, gameHeight) {
   self.speedX = 0;
 } 
 
+// @todo Trump.protype.moveLeft = function 
+/*Trump.prototype.moveLeft = function () {
+  trump.speedX -= 1;
+}
+Trump.prototype.moveRight = function() {
+  trump.speedX +=1;
+}*/
 
 Trump.prototype.setDirection = function (direction) {
   var self = this;

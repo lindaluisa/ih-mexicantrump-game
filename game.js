@@ -20,7 +20,6 @@ function Game(gameWindowElement) {
 
    // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
-  self.items = [];
 
   // @todo add event lisneter for key down, if key is arrowLeft, self.trump.moveLeft();
 
@@ -36,21 +35,32 @@ function Game(gameWindowElement) {
     }
   };
 
+  document.addEventListener('keydown', self.controlKeyboard);
 
+  self.items = [];
   function repaint() {
-
     // ----- logic
     self.trump.update();
 
     self.frames += 1;
     if (self.frames % self.dropRate === 0) {
       // @todo later var type = getRandomType();
-      self.items.push(new Item(self.ctx, self.width, self.height))
+      self.items.push(new Item(self.ctx, self.width, self.height)) //@ask can I just put self.size??
     }
+    // items removed when off-screen
+    self.items = self.items.filter(function (item) {
+      if (/* item.hasCollided OR */ item.y < self.height) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    });
 
-    // @todo remove items that are no longer in the screen from the items array
     // @todo detect collisions
 
+    // within for loop, 4 variables
+    // var collisionRight = player.x + player.width > items[ix]
 
     // ----- paint
 
@@ -74,4 +84,5 @@ Game.prototype.destroy = function () {
   self.finished = true;
   self.canvasElement.remove();
   document.removeEventListener('keydown', self.controlKeyboard);
-}
+  
+  }
