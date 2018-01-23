@@ -15,7 +15,6 @@ function main() {
     moveToGame();
   }
 
-  
   function landingPage(){
     stage = 'landing';
 
@@ -58,7 +57,6 @@ function main() {
   function leaveGame() {
     game.destroy();
   }
-
 
   ///* -------- GAME OVER -------- */// 
 

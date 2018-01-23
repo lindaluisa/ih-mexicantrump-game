@@ -21,8 +21,6 @@ function Game(gameWindowElement) {
    // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
 
-  // @todo add event lisneter for key down, if key is arrowLeft, self.trump.moveLeft();
-
   self.controlKeyboard = function (event) {
     var key = event.key;
     switch (key) {
@@ -47,20 +45,31 @@ function Game(gameWindowElement) {
       // @todo later var type = getRandomType();
       self.items.push(new Item(self.ctx, self.width, self.height)) //@ask can I just put self.size??
     }
-    // items removed when off-screen
+    // items removed when off-screen or collided
     self.items = self.items.filter(function (item) {
-      if (/* item.hasCollided OR */ item.y < self.height) {
-        return true;
+      if (item.collided || item.y > self.height) {
+        return false;
       }
       else {
-        return false;
+        return true;
       }
     });
 
-    // @todo detect collisions
-
-    // within for loop, 4 variables
-    // var collisionRight = player.x + player.width > items[ix]
+    // ----- detecting collision
+    self.items.forEach(function (nthItem) {
+      var collisionRightEdge = (nthItem.x + nthItem.size) >= self.trump.x; 
+      var collisionLeftEdge = nthItem.x <= (self.trump.x + self.trump.width);
+      var collisionDown = (nthItem.y + nthItem.size) >= self.trump.y;
+      var collisionTop = nthItem.y  <= (self.trump.y + self.trump.height);
+      
+      if (collisionRightEdge && collisionLeftEdge && collisionDown && collisionTop) {
+        self.trump.hasCollided(nthItem)
+        nthItem.setCollided(); 
+        // score ++
+      }
+  
+    })
+    
 
     // ----- paint
 
@@ -71,6 +80,10 @@ function Game(gameWindowElement) {
       self.items[ix].draw();
     }
 
+    // paint score
+
+    // paint the time left
+
     if (!self.finished) {
       window.requestAnimationFrame(repaint);
     }
@@ -79,10 +92,13 @@ function Game(gameWindowElement) {
   window.requestAnimationFrame(repaint);
 }
 
+
 Game.prototype.destroy = function () {
   var self = this;
   self.finished = true;
   self.canvasElement.remove();
   document.removeEventListener('keydown', self.controlKeyboard);
-  
-  }
+};
+
+  // do score
+  // do game over

@@ -16,14 +16,6 @@ function Trump (ctx, gameWidth, gameHeight) {
   self.speedX = 0;
 } 
 
-// @todo Trump.protype.moveLeft = function 
-/*Trump.prototype.moveLeft = function () {
-  trump.speedX -= 1;
-}
-Trump.prototype.moveRight = function() {
-  trump.speedX +=1;
-}*/
-
 Trump.prototype.setDirection = function (direction) {
   var self = this;
 
@@ -48,7 +40,12 @@ Trump.prototype.update = function() {
     if (self.x < 0) {
       self.x = self.gameWidth;
     }
-    
+}
+
+Trump.prototype.hasCollided = function (nthItem) {
+  var self = this;
+
+  return true;
 }
 
 Trump.prototype.draw = function () {
