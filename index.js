@@ -51,8 +51,8 @@ function main() {
     window.setTimeout(function () {
       leaveGame();
       moveToGameOver();
-    }, 5000);
-  }
+    }, 30000);
+   }
 
   function leaveGame() {
     game.destroy();

@@ -10,8 +10,7 @@ function Game(gameWindowElement) {
   self.finished = false; // when game executed, keep painting
   self.width = window.innerWidth;
   self.height = window.innerHeight;
-  // ---- score
-  self.score = 100;
+  self.score = 100; // score
   
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
@@ -20,29 +19,50 @@ function Game(gameWindowElement) {
 
   self.ctx = self.canvasElement.getContext('2d'); // creates ctx 2 draw
 
-   // create the objects
+  // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
 
   self.controlKeyboard = function (event) {
-    var key = event.key;
-    switch (key) {
-      case 'a':
+    switch (event.keyCode) {
+      case 37:
        self.trump.setDirection('W');
         break;
-      case 'd':
+      case 39:
         self.trump.setDirection('E');
         break;
     }
   };
 
   document.addEventListener('keydown', self.controlKeyboard);
+  // document.addEventListener('keydown', self.stopKeyboard);
+
+
+  function countTwoMinutes() {
+    self.currentTime = Date.now();
+    self.delta = self.currentTime - self.startTime;
+    self.timer += self.delta/1000;
+    self.updateTime(self.delta/1000);
+    self.startTime = self.currentTime;
+  }
+
+    self.updateTime = function (){
+      if(self.timer >= 20) // 10 seconds
+      {
+          self.timer = 0;
+          self.clearInterval(self.loop);
+      }
+    }
+
+    self.startTime = Date.now();
+    self.timer = 0;
+    self.loop = setInterval(countTwoMinutes, 1000);
+
 
 
   self.items = [];
   function repaint() {
     // ----- logic
     self.trump.update();
-    
 
     self.frames += 1;
     if (self.frames % self.dropRate === 0) {
@@ -80,7 +100,6 @@ function Game(gameWindowElement) {
     };
 
     // ----- paint
-
     self.ctx.clearRect(0,0, self.width, self.height);
     self.trump.draw();
 
@@ -90,11 +109,13 @@ function Game(gameWindowElement) {
 
     // paint score
     self.ctx.font = '35px Arial, sans-serif';
-    self.ctx.fillStyle = 'black';
+    self.ctx.fillStyle = 'peru';
     self.ctx.fillText('Trump is Mexican to ',  10, 50);
+    self.ctx.fillStyle = 'peru';
     self.ctx.fillText(self.score + " %",  120, 100);
 
     // paint the time left
+    self.ctx.fillText("Countdown: " + Math.round(self.timer), 600, 120);
 
     if (!self.finished) {
       window.requestAnimationFrame(repaint);
