@@ -3,6 +3,8 @@
 function Game(gameWindowElement) {
   var self = this;
 
+  self.types = ['brick', 'taco', 'sombrero' , 'ayayay'];
+
   self.gameWindowElement = gameWindowElement;
 
   self.dropRate = 60; // drop sth new every 60 frames
@@ -33,30 +35,41 @@ function Game(gameWindowElement) {
     }
   };
 
-  document.addEventListener('keydown', self.controlKeyboard);
-  // document.addEventListener('keydown', self.stopKeyboard);
+  // self.stopKeyboard = function (event) {
+  //   return true;
+  //   }
+  // };
 
+  document.addEventListener('keydown', self.controlKeyboard);
+  // document.addEventListener('keyup', self.stopKeyboard);
+  
+  self.timer = 120;
 
   function countTwoMinutes() {
     self.currentTime = Date.now();
     self.delta = self.currentTime - self.startTime;
-    self.timer += self.delta/1000;
+    self.timer -= self.delta/1000;
     self.updateTime(self.delta/1000);
     self.startTime = self.currentTime;
   }
 
-    self.updateTime = function (){
-      if(self.timer >= 20) // 10 seconds
-      {
-          self.timer = 0;
-          self.clearInterval(self.loop);
-      }
+
+  function getRandomType() {
+    var numTypes = self.types.length;
+    var randomNumber = Math.floor(Math.random() * numTypes);
+    return self.types[randomNumber];
+  }
+
+  self.updateTime = function (){
+    if(self.timer >= 120){
+        self.timer = 0;
+        window.clearInterval(self.timerIntervalId);
     }
-
-    self.startTime = Date.now();
-    self.timer = 0;
-    self.loop = setInterval(countTwoMinutes, 1000);
-
+  }
+  
+  self.startTime = Date.now();
+  self.timer = 120;
+  self.timerIntervalId = window.setInterval(countTwoMinutes, 1000);
 
 
   self.items = [];
@@ -66,8 +79,8 @@ function Game(gameWindowElement) {
 
     self.frames += 1;
     if (self.frames % self.dropRate === 0) {
-      // @todo later var type = getRandomType();
-      self.items.push(new Item(self.ctx, self.width, self.height)) //@ask can I just put self.size??
+      var type = getRandomType();
+      self.items.push(new Item(self.ctx, self.width, self.height, type)) 
     }
     // items removed when off-screen or collided
     self.items = self.items.filter(function (item) {
@@ -95,8 +108,8 @@ function Game(gameWindowElement) {
       }
     })
     
-    if (self.score <= 0) {
-      game.destroy();
+    if (self.timer <= -1) {
+      self.game.destroy();
     };
 
     // ----- paint
@@ -115,7 +128,7 @@ function Game(gameWindowElement) {
     self.ctx.fillText(self.score + " %",  120, 100);
 
     // paint the time left
-    self.ctx.fillText("Countdown: " + Math.round(self.timer), 600, 120);
+    self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50);
 
     if (!self.finished) {
       window.requestAnimationFrame(repaint);

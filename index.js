@@ -48,10 +48,10 @@ function main() {
     stage = 'game';
     game = new Game(gameWindowElement);
 
-    window.setTimeout(function () {
-      leaveGame();
-      moveToGameOver();
-    }, 30000);
+    // window.setTimeout(function () {
+    //   leaveGame();
+    //   moveToGameOver();
+    // }, 30000);
    }
 
   function leaveGame() {
