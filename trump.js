@@ -42,8 +42,6 @@ Trump.prototype.update = function() {
     }
 }
 
-
-
 Trump.prototype.hasCollided = function (nthItem) {
   var self = this;
 

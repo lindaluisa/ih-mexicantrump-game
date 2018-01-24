@@ -3,8 +3,6 @@
 function Game(gameWindowElement) {
   var self = this;
 
-  self.types = ['brick', 'taco', 'sombrero' , 'ayayay'];
-
   self.gameWindowElement = gameWindowElement;
 
   self.dropRate = 60; // drop sth new every 60 frames
@@ -13,6 +11,7 @@ function Game(gameWindowElement) {
   self.width = window.innerWidth;
   self.height = window.innerHeight;
   self.score = 100; // score
+  self.types = ['brick', 'taco', 'sombrero' , 'ayayay'];
   
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
@@ -102,10 +101,20 @@ function Game(gameWindowElement) {
       if (collisionRightEdge && collisionLeftEdge && collisionDown && collisionTop) {
         self.trump.hasCollided(nthItem)
         nthItem.setCollided(); 
-      
-      
-        self.score = self.score - 20;
-      }
+
+          if (nthItem.type === 'brick') {
+            self.score = self.score - 20;
+          }
+          else if (nthItem.type === 'taco') {
+            self.score = self.score + 20;
+          }
+          else if (nthItem.type === 'sombrero'){
+            self.score = self.score + 80;
+          }
+          else if (nthItem.type === 'ayayay') {
+            self.score = self.score - 100;
+          }
+        }
     })
     
     if (self.timer <= -1) {
@@ -125,7 +134,7 @@ function Game(gameWindowElement) {
     self.ctx.fillStyle = 'peru';
     self.ctx.fillText('Trump is Mexican to ',  10, 50);
     self.ctx.fillStyle = 'peru';
-    self.ctx.fillText(self.score + " %",  120, 100);
+    self.ctx.fillText(self.score, 120, 100);
 
     // paint the time left
     self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50);
@@ -143,6 +152,7 @@ Game.prototype.destroy = function () {
   self.finished = true;
   self.canvasElement.remove();
   document.removeEventListener('keydown', self.controlKeyboard);
+  
 };
 
 

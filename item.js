@@ -15,11 +15,11 @@ function Item (ctx, gameWidth, gameHeight, type) {
   self.y = -self.size
   self.type = type 
   self.collided = false;
+  self.score = self.score;
 } 
 
 Item.prototype.setCollided = function () {
   var self = this;
-
   self.collided = true;
 }
 
@@ -41,7 +41,7 @@ Item.prototype.draw = function () {
     self.ctx.fillStyle = 'white';
   }
   else {
-    self.ctx.fillStyle = 'black';
+    self.ctx.fillStyle = 'black'
   }
 
   self.ctx.fillRect(self.x, self.y, self.size, self.size);
