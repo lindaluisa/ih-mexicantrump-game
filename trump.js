@@ -3,8 +3,9 @@
 function Trump (ctx, gameWidth, gameHeight) {
   var self = this;
 
-  self.width = 100;
-  self.height = 200;
+  self.level = 0;
+  self.width = 50;
+  self.height = 100;
   self.ctx = ctx;
 
   self.gameWidth = gameWidth;
@@ -21,6 +22,18 @@ Trump.prototype.setDirection = function (direction) {
 
   self.direction = direction;
 }
+
+
+Trump.prototype.setLevel = function (level) {
+  var self = this;
+
+  self.level = level;
+  self.width = 50 + (self.level * 25);
+  self.height = 100 + (self.level * 50);
+  self.y = self.gameHeight - self.height;
+}
+
+
 Trump.prototype.update = function() {
   var self = this;
 
@@ -55,4 +68,13 @@ Trump.prototype.draw = function () {
 
   self.ctx.fillStyle = '#083021';
   self.ctx.fillRect(self.x, self.y, self.width, self.height);
+  // if (self.level === 0) {
+
+  // }
+  // else if (self.level === 1) {
+    
+  // }
+  // else if (self.level === 2) {
+    
+  // }
 }

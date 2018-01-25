@@ -5,13 +5,17 @@ function Game(gameWindowElement) {
 
   self.gameWindowElement = gameWindowElement;
 
-  self.dropRate = 60; // drop sth new every 60 frames
+  self.dropRates = [60, 40, 20]; // drop sth new every 60 frames
   self.frames = 0;
   self.finished = false; // when game executed, keep painting
   self.width = window.innerWidth;
   self.height = window.innerHeight;
   self.score = 100; // score
-  self.types = ['brick', 'taco', 'sombrero' , 'ayayay'];
+  self.types = ['brick', 'brick', 'brick', 'brick', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
+  self.level = 0;
+  self.levelNames = ['Piñata', 'Luchador', 'Mariachi'];
+  self.levelThresholds = [100, 200];
+  self.timer = 200;
   
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
@@ -35,51 +39,53 @@ function Game(gameWindowElement) {
   };
 
   // self.stopKeyboard = function (event) {
-  //   return true;
+  //   switch (event.keyCode) {
+  //     case 37:
+  //      self.trump.setDirection('W');
+  //       break;
+  //     case 39:
+  //       self.trump.setDirection('E');
+  //       break;
   //   }
-  // };
 
   document.addEventListener('keydown', self.controlKeyboard);
   // document.addEventListener('keyup', self.stopKeyboard);
   
-  self.timer = 10;
+
 
   function countTwoMinutes() {
     self.currentTime = Date.now();
     self.delta = self.currentTime - self.startTime;
     self.timer -= self.delta/1000;
-    self.updateTime(self.delta/1000);
     self.startTime = self.currentTime;
   }
-
 
   function getRandomType() {
     var numTypes = self.types.length;
     var randomNumber = Math.floor(Math.random() * numTypes);
     return self.types[randomNumber];
   }
-
-  self.updateTime = function (){
-    if(self.timer >= 10){
-        self.timer = 0;
-        window.clearInterval(self.timerIntervalId);
-    }
-  }
   
   self.startTime = Date.now();
-  self.timer = 10;
   self.timerIntervalId = window.setInterval(countTwoMinutes, 1000);
 
   self.items = [];
   function repaint() {
     // ----- logic
+
+    if (self.level < 2 && self.score > self.levelThresholds[self.level]) {
+      self.level++;
+      self.trump.setLevel(self.level);
+    }
+
     self.trump.update();
 
     self.frames += 1;
-    if (self.frames % self.dropRate === 0) {
+    if (self.frames % self.dropRates[self.level] === 0) { //@enhancing 
       var type = getRandomType();
       self.items.push(new Item(self.ctx, self.width, self.height, type)) 
     }
+
     // items removed when off-screen or collided
     self.items = self.items.filter(function (item) {
       if (item.collided || item.y > self.height) {
@@ -102,25 +108,22 @@ function Game(gameWindowElement) {
         nthItem.setCollided(); 
 
           if (nthItem.type === 'brick') {
-            self.score = self.score - 20;
+            self.score = self.score - 150;
           }
           else if (nthItem.type === 'taco') {
-            self.score = self.score + 20;
+            self.score = self.score + 49;
           }
           else if (nthItem.type === 'sombrero'){
-            self.score = self.score + 15;
+            self.score = self.score + 101;
           }
           else if (nthItem.type === 'ayayay') {
             var sound = new Audio('./images/gritomariachi.mp3');
             sound.play()
-            self.score = self.score + 30;
-          }
-          else {
-            self.score = self.score + 30;
+            self.score = self.score + 201;
           }
         }
     })
-    if (self.score <=0 || self.timer <= -1) {
+    if (self.score <=0 || self.timer < 0) {
       self.onEnded();
     };
 
@@ -138,6 +141,9 @@ function Game(gameWindowElement) {
     self.ctx.fillText('Score: ',  10, 50);
     self.ctx.fillStyle = 'white';
     self.ctx.fillText(self.score, 120, 50);
+
+    // paint the level
+    self.ctx.fillText("Level: " + self.levelNames[self.level], 450, 50)
 
     // paint the time left
     self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50)

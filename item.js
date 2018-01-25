@@ -1,6 +1,6 @@
 'use strict'
 
-function Item (ctx, gameWidth, gameHeight, type) {
+function Item (ctx, gameWidth, gameHeight, type, level) {
   var self = this;
 
   self.size = 100;
@@ -34,6 +34,7 @@ Item.prototype.draw = function () {
   
   if (self.type === 'brick') {
     picture.src = 'images/brick.png';
+
   }
   else if (self.type === 'taco') {
     picture.src = 'images/tacos.png';
