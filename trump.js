@@ -26,10 +26,10 @@ Trump.prototype.update = function() {
 
     switch (self.direction) {
       case 'E':
-        self.x += 3;
+        self.x += 8;
         break;
       case 'W':
-        self.x -= 3;
+        self.x -= 8;
         break;
     }
     
@@ -53,6 +53,6 @@ Trump.prototype.draw = function () {
 
   self.x += self.speedX;
 
-  self.ctx.fillStyle = 'black';
+  self.ctx.fillStyle = '#083021';
   self.ctx.fillRect(self.x, self.y, self.width, self.height);
 }

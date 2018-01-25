@@ -3,7 +3,9 @@
 function main() {
 
   var gameWindowElement = document.querySelector('#game-window');
-
+  
+  var backgroundGame = document.querySelector('body');
+  
   var stage;
   var game;
 
@@ -46,12 +48,13 @@ function main() {
 
   function moveToGame() {
     stage = 'game';
+
     game = new Game(gameWindowElement);
 
-    // window.setTimeout(function () {
-    //   leaveGame();
-    //   moveToGameOver();
-    // }, 30000);
+    game.onGameOver(function() {
+      leaveGame();
+      moveToGameOver();
+    })
    }
 
   function leaveGame() {
@@ -74,11 +77,15 @@ function main() {
     gameOverElement.setAttribute('id', 'game-over');
     
     var title = document.createElement('h3');
-    title.innerText = 'Try harder, Trump!';
+    title.innerText = 'You are a Lucha Libre Fighter!';
     gameOverElement.appendChild(title);
 
     var yourScore = document.createElement('h2');
-    yourScore.innerText = 'SCORE: ' + game.score + " %";
+    yourScore.innerText = 'SCORE: ' + game.score;
+    gameOverElement.appendChild(yourScore);
+
+    var yourScore = document.createElement('h2');
+    yourScore.innerText = 'Cmon, you can be a Mariachi!';
     gameOverElement.appendChild(yourScore);
 
     playAgainBtn = document.createElement('button');
@@ -100,3 +107,4 @@ function main() {
 }
 
 window.onload = main; // fired when document's window rdy for presentation
+

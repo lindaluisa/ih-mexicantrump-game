@@ -42,7 +42,7 @@ function Game(gameWindowElement) {
   document.addEventListener('keydown', self.controlKeyboard);
   // document.addEventListener('keyup', self.stopKeyboard);
   
-  self.timer = 120;
+  self.timer = 10;
 
   function countTwoMinutes() {
     self.currentTime = Date.now();
@@ -60,16 +60,15 @@ function Game(gameWindowElement) {
   }
 
   self.updateTime = function (){
-    if(self.timer >= 120){
+    if(self.timer >= 10){
         self.timer = 0;
         window.clearInterval(self.timerIntervalId);
     }
   }
   
   self.startTime = Date.now();
-  self.timer = 120;
+  self.timer = 10;
   self.timerIntervalId = window.setInterval(countTwoMinutes, 1000);
-
 
   self.items = [];
   function repaint() {
@@ -109,16 +108,20 @@ function Game(gameWindowElement) {
             self.score = self.score + 20;
           }
           else if (nthItem.type === 'sombrero'){
-            self.score = self.score + 80;
+            self.score = self.score + 15;
           }
           else if (nthItem.type === 'ayayay') {
-            self.score = self.score - 100;
+            var sound = new Audio('./images/gritomariachi.mp3');
+            sound.play()
+            self.score = self.score + 30;
+          }
+          else {
+            self.score = self.score + 30;
           }
         }
     })
-    
-    if (self.timer <= -1) {
-      self.game.destroy();
+    if (self.score <=0 || self.timer <= -1) {
+      self.onEnded();
     };
 
     // ----- paint
@@ -131,13 +134,13 @@ function Game(gameWindowElement) {
 
     // paint score
     self.ctx.font = '35px Arial, sans-serif';
-    self.ctx.fillStyle = 'peru';
-    self.ctx.fillText('Trump is Mexican to ',  10, 50);
-    self.ctx.fillStyle = 'peru';
-    self.ctx.fillText(self.score, 120, 100);
+    self.ctx.fillStyle = 'white';
+    self.ctx.fillText('Score: ',  10, 50);
+    self.ctx.fillStyle = 'white';
+    self.ctx.fillText(self.score, 120, 50);
 
     // paint the time left
-    self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50);
+    self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50)
 
     if (!self.finished) {
       window.requestAnimationFrame(repaint);
@@ -152,8 +155,10 @@ Game.prototype.destroy = function () {
   self.finished = true;
   self.canvasElement.remove();
   document.removeEventListener('keydown', self.controlKeyboard);
-  
+
 };
 
-
-  // @ todo do game over
+Game.prototype.onGameOver = function (callback) {
+  var self = this;
+  self.onEnded = callback;
+}

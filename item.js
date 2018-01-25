@@ -3,7 +3,7 @@
 function Item (ctx, gameWidth, gameHeight, type) {
   var self = this;
 
-  self.size = 50;
+  self.size = 100;
  
   self.ctx = ctx;
   self.vy = 4;
@@ -20,29 +20,38 @@ function Item (ctx, gameWidth, gameHeight, type) {
 
 Item.prototype.setCollided = function () {
   var self = this;
-  self.collided = true;
+
+    self.collided = true;
+
 }
 
 Item.prototype.draw = function () {
   var self = this;
 
+  var picture = new Image();
+  
   self.y = self.y + self.vy;
-
+  
   if (self.type === 'brick') {
-    self.ctx.fillStyle = 'brown';
+    picture.src = 'images/brick.png';
   }
   else if (self.type === 'taco') {
-    self.ctx.fillStyle = 'orange';
+    picture.src = 'images/tacos.png';
+    
   }
   else if (self.type === 'sombrero'){
-    self.ctx.fillStyle = 'violet';
+    picture.src = 'images/sombrero.png';
+    
   }
   else if (self.type === 'ayayay') {
-    self.ctx.fillStyle = 'white';
+    picture.src = 'images/ayayay.png';
+    
   }
   else {
     self.ctx.fillStyle = 'black'
   }
-
-  self.ctx.fillRect(self.x, self.y, self.size, self.size);
+  // self.ctx.fillRect(img, self.size, self.size);
+  self.ctx.drawImage(picture, self.x, self.y, self.size, self.size);
+  
+  
 }
