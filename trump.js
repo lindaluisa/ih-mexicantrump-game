@@ -3,7 +3,7 @@
 function Trump (ctx, gameWidth, gameHeight) {
   var self = this;
 
-  self.level = 0;
+  // self.level = 0;
   self.width = 50;
   self.height = 100;
   self.ctx = ctx;
@@ -57,7 +57,6 @@ Trump.prototype.update = function() {
 
 Trump.prototype.hasCollided = function (nthItem) {
   var self = this;
-
   return true;
 }
 
@@ -66,15 +65,33 @@ Trump.prototype.draw = function () {
 
   self.x += self.speedX;
 
-  self.ctx.fillStyle = '#083021';
-  self.ctx.fillRect(self.x, self.y, self.width, self.height);
-  // if (self.level === 0) {
+  //self.ctx.fillRect(self.x, self.y, self.width, self.height);
+  //self.ctx.fillStyle = '#083021';
 
-  // }
-  // else if (self.level === 1) {
-    
-  // }
-  // else if (self.level === 2) {
-    
-  // }
-}
+   var pict = new Image();
+   //self.level = 0;
+    if (self.level === 0) {
+      pict.src = './images/trumpo.png';
+      // self.width = 100;
+      // self.height = 100;
+    }
+    else if (self.level === 1) {
+       pict.src = './images/pinata.png';
+      //  self.width = 100;
+      //  self.height = 100;
+     }
+    else if (self.level === 2) {
+      pict.src = './images/luchador.png';
+      // self.width = 100;
+      // self.height = 100;
+     }
+    else if (self.level === 3) {
+      pict.src = './images/mariachi.png';
+      // self.width = 100;
+      // self.height = 100;
+     }
+  self.ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+self.ctx.fillRect(self.x, self.y, self.width, self.height);
+
+self.ctx.drawImage(pict, self.x, self.y, self.width, self.height);
+ }

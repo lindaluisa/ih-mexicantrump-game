@@ -18,46 +18,103 @@ body {
 }
 /* ---- typography ---- */
 
+/* 
+.background-img-two {
+  background-image: url('images/splashover.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+} */
 
-body {
-  background-color: black;
+#game-over {
+  background-image: url('images/splashover.png');
+  background-repeat: no-repeat;
+  background-size:cover; 
+  height: 100vh;
 }
-
 h1 {
-  color: #0b5943;
+  color: #aa1111;
   font-family: 'Frijole';
   margin: 0px;
-  padding: 60px 0 0px 0;
-  font-size: 50px;
+  padding: 20px 0 0px 0;
+  font-size: 70px;
+  position: absolute;
+  left: 250px;
+
+  
 }
 
 h3, h2 {
-  color: peru;
+  color: black;
   font-family: 'Londrina Sketch';
-  letter-spacing: 5px;
-  padding: 80px 0 30px 0;
-  font-size: 30px;
+  letter-spacing: 9px;
+  font-size: 40px;
+  position: absolute;
+  top: 70px;
+  left: 350px;
 }
 
 h2 {
   color: white;
-  font-size: 25px;
+  font-size: 30px;
 }
 
-button, btn {
-  background-color: black;
-  border-radius: 5px;
-  color: peru;
+h4, h5, h6 {
+  color: black;
   font-family: 'Londrina Sketch';
-  font-size: 30px;
+  letter-spacing: 9px;
+  font-size: 60px;
+  position: absolute;
+  bottom: 450px;
+  left: 30px;
+}
+
+h5 {
+  position: absolute;
+  top: 180px;
+  left: 30px;
+  color: #aa1111;
+}
+
+h6 {
+  position: absolute;
+  top: 300px;
+  left: 30px;
+}
+
+h4 {
+  position: absolute;
+  bottom: 470px;
+  left: 30px;
+}
+
+
+
+
+button, btn, #play-again {
+  background-color: transparent;
+  border-color: white;
+  border-radius: 10px;
+  border: #530c0c 15px double;
+  color: #530c0c;
+  font-family: 'Frijole';
+  font-size: 40px;
   font-weight: bold;
   letter-spacing: 5px;
-  padding: 10px 25px;
+  padding: 15px 30px;
   text-transform: uppercase;
+  position: absolute;
+  left: 479px;
+  bottom: 325px;
 }
-  
-btn {
-  padding: 60px 25px;
+
+#play-again {
+  position: absolute;
+  left: 30px;
+  bottom: 200px;
+  font-size: 20px;
+  padding: 25px 20px;
+  border: black 15px double;
+  color: black;
 }
 
 /* ---- layout ---- */
@@ -77,8 +134,15 @@ btn {
 }
 
 canvas {
-  border: solid black 1px;
   background-image: url('images/moving.gif');
   background-repeat: no-repeat;
   background-size:cover;
 }
+
+#landing {
+  height: 100vh;
+  background-image: url('images/splash.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+

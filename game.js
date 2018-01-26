@@ -13,9 +13,9 @@ function Game(gameWindowElement) {
   self.score = 100; // score
   self.types = ['brick', 'brick', 'brick', 'brick', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
   self.level = 0;
-  self.levelNames = ['Piñata', 'Luchador', 'Mariachi'];
-  self.levelThresholds = [100, 200];
-  self.timer = 200;
+  self.levelNames = ['Trump', 'Piñata', 'Luchador', 'Mariachi'];
+  self.levelThresholds = [300, 500, 600, 2000];
+  self.timer = 5;
   
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
@@ -23,9 +23,14 @@ function Game(gameWindowElement) {
   gameWindowElement.appendChild(self.canvasElement);
 
   self.ctx = self.canvasElement.getContext('2d'); // creates ctx 2 draw
+  
+  var sound = new Audio('./images/backgroundmusic.mp3');
+  sound.volume = 0.2;
+  sound.play()
 
   // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
+  self.trump.setLevel(self.level);
 
   self.controlKeyboard = function (event) {
     switch (event.keyCode) {
@@ -38,21 +43,8 @@ function Game(gameWindowElement) {
     }
   };
 
-  // self.stopKeyboard = function (event) {
-  //   switch (event.keyCode) {
-  //     case 37:
-  //      self.trump.setDirection('W');
-  //       break;
-  //     case 39:
-  //       self.trump.setDirection('E');
-  //       break;
-  //   }
-
   document.addEventListener('keydown', self.controlKeyboard);
-  // document.addEventListener('keyup', self.stopKeyboard);
   
-
-
   function countTwoMinutes() {
     self.currentTime = Date.now();
     self.delta = self.currentTime - self.startTime;
@@ -73,7 +65,7 @@ function Game(gameWindowElement) {
   function repaint() {
     // ----- logic
 
-    if (self.level < 2 && self.score > self.levelThresholds[self.level]) {
+    if (self.level < 3 && self.score > self.levelThresholds[self.level]) {
       self.level++;
       self.trump.setLevel(self.level);
     }
@@ -83,7 +75,7 @@ function Game(gameWindowElement) {
     self.frames += 1;
     if (self.frames % self.dropRates[self.level] === 0) { //@enhancing 
       var type = getRandomType();
-      self.items.push(new Item(self.ctx, self.width, self.height, type)) 
+      self.items.push(new Item(self.ctx, self.width, self.height, type,self.level)) 
     }
 
     // items removed when off-screen or collided
@@ -109,12 +101,19 @@ function Game(gameWindowElement) {
 
           if (nthItem.type === 'brick') {
             self.score = self.score - 150;
+            var sound = new Audio('./images/wrong.mp3');
+            sound.play()
           }
           else if (nthItem.type === 'taco') {
             self.score = self.score + 49;
+            var sound = new Audio('./images/bingbing.mp3');
+            sound.volume = 0.99;
+            sound.play()
           }
           else if (nthItem.type === 'sombrero'){
             self.score = self.score + 101;
+            var sound = new Audio('./images/bongbong.mp3');
+            sound.play()
           }
           else if (nthItem.type === 'ayayay') {
             var sound = new Audio('./images/gritomariachi.mp3');
@@ -161,7 +160,7 @@ Game.prototype.destroy = function () {
   self.finished = true;
   self.canvasElement.remove();
   document.removeEventListener('keydown', self.controlKeyboard);
-
+  
 };
 
 Game.prototype.onGameOver = function (callback) {

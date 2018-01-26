@@ -24,7 +24,7 @@ function main() {
     landingElement.setAttribute('id', 'landing');
 
     var title = document.createElement('h1')
-    title.innerText = 'D0N TRUMPIT0';
+    title.innerText = 'DON TRUMPITO';
     landingElement.appendChild(title);
     var description = document.createElement('h3');
     description.innerText = '- From Trump To Chuy -';
@@ -76,20 +76,18 @@ function main() {
     gameOverElement = document.createElement('div');
     gameOverElement.setAttribute('id', 'game-over');
     
-    var title = document.createElement('h3');
-    title.innerText = 'You are a Lucha Libre Fighter!';
+    var title = document.createElement('h5');
+    title.innerText = 'Try Harder, Trump!!';
     gameOverElement.appendChild(title);
 
-    var yourScore = document.createElement('h2');
+    var yourScore = document.createElement('h4');
     yourScore.innerText = 'SCORE: ' + game.score;
     gameOverElement.appendChild(yourScore);
 
-    var yourScore = document.createElement('h2');
-    yourScore.innerText = 'Cmon, you can be a Mariachi!';
-    gameOverElement.appendChild(yourScore);
-
     playAgainBtn = document.createElement('button');
-    playAgainBtn.innerText = 'Start again!';
+
+    playAgainBtn.setAttribute('id', 'play-again');
+    playAgainBtn.innerText = 'Play again!';
     gameOverElement.appendChild(playAgainBtn);
 
     gameWindowElement.appendChild(gameOverElement);
