@@ -4,7 +4,7 @@ function Trump (ctx, gameWidth, gameHeight) {
   var self = this;
 
   // self.level = 0;
-  self.width = 50;
+  self.width = 100;
   self.height = 100;
   self.ctx = ctx;
 
@@ -71,9 +71,8 @@ Trump.prototype.draw = function () {
    var pict = new Image();
    //self.level = 0;
     if (self.level === 0) {
-      pict.src = './images/trumpo.png';
-      // self.width = 100;
-      // self.height = 100;
+      pict.src = './images/trump.png';
+      self.width = 130;
     }
     else if (self.level === 1) {
        pict.src = './images/pinata.png';

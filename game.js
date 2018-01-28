@@ -14,8 +14,8 @@ function Game(gameWindowElement) {
   self.types = ['brick', 'brick', 'brick', 'brick', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
   self.level = 0;
   self.levelNames = ['Trump', 'Piñata', 'Luchador', 'Mariachi'];
-  self.levelThresholds = [300, 500, 600, 2000];
-  self.timer = 5;
+  self.levelThresholds = [300, 1000, 2000];
+  self.timer = 40;
   
   self.canvasElement = document.createElement('canvas'); //creates canvas
   self.canvasElement.width = self.width;
@@ -24,9 +24,9 @@ function Game(gameWindowElement) {
 
   self.ctx = self.canvasElement.getContext('2d'); // creates ctx 2 draw
   
-  var sound = new Audio('./images/backgroundmusic.mp3');
+  var sound = new Audio('./images/mariachimusic.mp3');
   sound.volume = 0.2;
-  sound.play()
+  sound.play();
 
   // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
@@ -65,7 +65,7 @@ function Game(gameWindowElement) {
   function repaint() {
     // ----- logic
 
-    if (self.level < 3 && self.score > self.levelThresholds[self.level]) {
+    if (self.level < 4 && self.score > self.levelThresholds[self.level]) {
       self.level++;
       self.trump.setLevel(self.level);
     }
@@ -108,11 +108,11 @@ function Game(gameWindowElement) {
             self.score = self.score + 49;
             var sound = new Audio('./images/bingbing.mp3');
             sound.volume = 0.99;
-            sound.play()
+            sound.play();
           }
           else if (nthItem.type === 'sombrero'){
             self.score = self.score + 101;
-            var sound = new Audio('./images/bongbong.mp3');
+            var sound = new Audio('./images/bingbung.mp3');
             sound.play()
           }
           else if (nthItem.type === 'ayayay') {
@@ -135,17 +135,20 @@ function Game(gameWindowElement) {
     }
 
     // paint score
-    self.ctx.font = '35px Arial, sans-serif';
-    self.ctx.fillStyle = 'white';
+    self.ctx.font = '30px Frijole, sans-serif';
+    self.ctx.fillStyle = '#aa1111';
+
     self.ctx.fillText('Score: ',  10, 50);
-    self.ctx.fillStyle = 'white';
-    self.ctx.fillText(self.score, 120, 50);
+    
+    self.ctx.fillStyle = '#aa1111';
+    self.ctx.fillText("   " + self.score, 120, 50);
+    
 
     // paint the level
     self.ctx.fillText("Level: " + self.levelNames[self.level], 450, 50)
 
     // paint the time left
-    self.ctx.fillText("Countdown: " + Math.round(self.timer), 850, 50)
+    self.ctx.fillText("Countdown: " + Math.round(self.timer), 890, 50)
 
     if (!self.finished) {
       window.requestAnimationFrame(repaint);

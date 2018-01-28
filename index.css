@@ -39,8 +39,6 @@ h1 {
   font-size: 70px;
   position: absolute;
   left: 250px;
-
-  
 }
 
 h3, h2 {
@@ -70,7 +68,7 @@ h4, h5, h6 {
 
 h5 {
   position: absolute;
-  top: 180px;
+  top: 150px;
   left: 30px;
   color: #aa1111;
 }
@@ -86,7 +84,6 @@ h4 {
   bottom: 470px;
   left: 30px;
 }
-
 
 
 

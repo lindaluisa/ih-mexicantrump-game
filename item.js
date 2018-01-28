@@ -40,7 +40,7 @@ Item.prototype.draw = function () {
 
   }
   else if (self.type === 'sombrero'){
-    self.width = 120;
+    self.width = 150;
     picture.src = 'images/sombrero.png';
 
   }
