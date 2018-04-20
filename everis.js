@@ -7,7 +7,7 @@ function Everis (ctx, gameWidth, gameHeight, type, level) {
   self.width = 100;
   self.height = 100;
 
-  self.y = 500;
+  self.y = 800;
 
   self.ctx = ctx;
   self.vy = 4;
