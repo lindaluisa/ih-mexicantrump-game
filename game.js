@@ -11,7 +11,7 @@ function Game(gameWindowElement) {
   self.width = window.innerWidth;
   self.height = window.innerHeight;
   self.score = 100; // score
-  self.types = ['brick', 'brick', 'brick', 'brick', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
+  self.types = ['brick', 'everis', 'everis', 'brick', 'everis', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
   self.level = 0;
   self.levelNames = ['Trump', 'Piñata', 'Luchador', 'Mariachi'];
   self.levelThresholds = [300, 1000, 2000];
@@ -24,9 +24,9 @@ function Game(gameWindowElement) {
 
   self.ctx = self.canvasElement.getContext('2d'); // creates ctx 2 draw
   
-  var sound = new Audio('./images/mariachimusic.mp3');
-  sound.volume = 0.2;
-  sound.play();
+  // var sound = new Audio('./images/mariachimusic.mp3');
+  // sound.volume = 0.2;
+  // sound.play();
 
   // create the objects
   self.trump = new Trump(self.ctx, self.width, self.height);
@@ -37,7 +37,7 @@ function Game(gameWindowElement) {
       case 37:
        self.trump.setDirection('W');
         break;
-      case 39:
+      case 39:  
         self.trump.setDirection('E');
         break;
     }
@@ -90,11 +90,17 @@ function Game(gameWindowElement) {
 
     // ----- detecting collision
     self.items.forEach(function (nthItem) {
+
       var collisionRightEdge = (nthItem.x + nthItem.size) >= self.trump.x; 
       var collisionLeftEdge = nthItem.x <= (self.trump.x + self.trump.width);
       var collisionDown = (nthItem.y + nthItem.size) >= self.trump.y;
       var collisionTop = nthItem.y  <= (self.trump.y + self.trump.height);
-      
+
+      // var collisionRightEdge = (nthItem.x + nthItem.size) <= self.trump.x; 
+      // var collisionLeftEdge = (self.trump.x + self.trump.width) >= nthItem.x; 
+      // // var collisionDown = (nthItem.y + nthItem.size) >= self.trump.y;
+      // var collisionTop = nthItem.y  <= (self.trump.y + self.trump.height);
+
       if (collisionRightEdge && collisionLeftEdge && collisionDown && collisionTop) {
         self.trump.hasCollided(nthItem)
         nthItem.setCollided(); 
@@ -120,8 +126,14 @@ function Game(gameWindowElement) {
             sound.play()
             self.score = self.score + 201;
           }
-        }
+          else if (nthItem.type === 'everis') {
+            self.score = self.score + 500;
+          }
+        } 
     })
+
+
+
     if (self.score <=0 || self.timer < 0) {
       self.onEnded();
     };
