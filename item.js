@@ -18,7 +18,7 @@ function Item (ctx, gameWidth, gameHeight, type, level) {
   self.gameHeight = gameHeight;
 
   self.x = Math.random() * (self.gameWidth - self.size);
-  self.y = self.size
+  self.y = - self.size
   self.type = type 
   self.collided = false;
   self.score = self.score;
@@ -55,13 +55,17 @@ Item.prototype.draw = function () {
   else if (self.type === 'ayayay') {
     picture.src = 'images/ayayay.png'; 
   }
+  else if (self.type === 'everis') {
+    picture.src = 'images/everis.png';
+    self.y = 800 + self.size;
+}
 
-  // var bottomUpPic = new Image();
+  // var everis = new Image();
   //   self.y = 800 + self.size
   //   self.y = self.y - self.vy;
 
-  //    if (self.type === 'bottomUpPic') {
-  //   picture.src = 'images/bottomUpPic.png';
+  //    if (self.type === 'everis') {
+  //   picture.src = 'images/everis.png';
     
   // }
 

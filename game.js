@@ -11,7 +11,7 @@ function Game(gameWindowElement) {
   self.width = window.innerWidth;
   self.height = window.innerHeight;
   self.score = 100; // score
-  self.types = ['brick', 'everis', 'everis', 'brick', 'everis', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
+  self.types = ['evers', 'everis', 'everis', 'everis', 'everis', 'brick', 'taco', 'taco' , 'sombrero', 'sombrero' , 'ayayay'];
   self.level = 0;
   self.levelNames = ['Trump', 'Piñata', 'Luchador', 'Mariachi'];
   self.levelThresholds = [300, 1000, 2000];
@@ -95,11 +95,6 @@ function Game(gameWindowElement) {
       var collisionLeftEdge = nthItem.x <= (self.trump.x + self.trump.width);
       var collisionDown = (nthItem.y + nthItem.size) >= self.trump.y;
       var collisionTop = nthItem.y  <= (self.trump.y + self.trump.height);
-
-      // var collisionRightEdge = (nthItem.x + nthItem.size) <= self.trump.x; 
-      // var collisionLeftEdge = (self.trump.x + self.trump.width) >= nthItem.x; 
-      // // var collisionDown = (nthItem.y + nthItem.size) >= self.trump.y;
-      // var collisionTop = nthItem.y  <= (self.trump.y + self.trump.height);
 
       if (collisionRightEdge && collisionLeftEdge && collisionDown && collisionTop) {
         self.trump.hasCollided(nthItem)
