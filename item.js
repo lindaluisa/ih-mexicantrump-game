@@ -9,19 +9,18 @@ function Item (ctx, gameWidth, gameHeight, type, level) {
 
   // self.vy = 4;
   // self.y = -self.size
-
-
   self.ctx = ctx;
-  self.vy = 4;
 
   self.gameWidth = gameWidth;
   self.gameHeight = gameHeight;
-
+  
   self.x = Math.random() * (self.gameWidth - self.size);
-  self.y = - self.size
+  self.y = - self.size;
   self.type = type 
   self.collided = false;
   self.score = self.score;
+
+  self.vy =  4;
 } 
 
 Item.prototype.setCollided = function () {
@@ -30,15 +29,10 @@ Item.prototype.setCollided = function () {
     self.collided = true;
 }
 
-  // self.vy = 4;
-  // self.y = -self.size
-  // self.size = 100;
-
 Item.prototype.draw = function () {
   var self = this;
 
   var picture = new Image();
-    self.y = -self.size
     self.y = self.y + self.vy;
 
   if (self.type === 'brick') {
@@ -50,24 +44,10 @@ Item.prototype.draw = function () {
   else if (self.type === 'sombrero'){
     self.width = 150;
     picture.src = 'images/sombrero.png';
-
   }
   else if (self.type === 'ayayay') {
     picture.src = 'images/ayayay.png'; 
   }
-  else if (self.type === 'everis') {
-    picture.src = 'images/everis.png';
-    self.y = 800 + self.size;
-}
-
-  // var everis = new Image();
-  //   self.y = 800 + self.size
-  //   self.y = self.y - self.vy;
-
-  //    if (self.type === 'everis') {
-  //   picture.src = 'images/everis.png';
-    
-  // }
 
   self.ctx.drawImage(picture, self.x, self.y, self.width, self.height);
 
