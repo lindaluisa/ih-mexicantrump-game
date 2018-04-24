@@ -7,7 +7,7 @@ function Everis (ctx, gameWidth, gameHeight, type, level) {
   self.width = 100;
   self.height = 100;
 
-  self.y = 800;
+  self.y = 500;
 
   self.ctx = ctx;
   self.vy = 4;
@@ -32,8 +32,7 @@ Everis.prototype.draw = function () {
   var self = this;
 
   var everis = new Image();
-
-  self.type === 'everis'
+  self.type === 'everis';
   everis.src = 'images/everis.png';
   self.y = self.y - self.vy;
 
