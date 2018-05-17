@@ -1,6 +1,6 @@
 'use strict'
 
-function Everis (ctx, gameWidth, gameHeight, type, level) {
+function ElChapo (ctx, gameWidth, gameHeight, type, level) {
   var self = this;
 
   self.size = 100;
@@ -22,19 +22,19 @@ function Everis (ctx, gameWidth, gameHeight, type, level) {
 }
 
 
-Everis.prototype.setCollided = function () {
+ElChapo.prototype.setCollided = function () {
   var self = this;
 
    self.collided = true;
 }
 
-Everis.prototype.draw = function () {
+ElChapo.prototype.draw = function () {
   var self = this;
 
-  var everis = new Image();
-  self.type === 'everis';
-  everis.src = 'images/everis.png';
+  var elchapo = new Image();
+  self.type === 'elchapo';
+  elchapo.src = 'images/elchapo.png';
   self.y = self.y - self.vy;
 
-   self.ctx.drawImage(everis, self.x, self.y, self.width, self.height);
+   self.ctx.drawImage(elchapo, self.x, self.y, self.width, self.height);
 }

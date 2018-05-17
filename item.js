@@ -1,5 +1,6 @@
 'use strict'
 
+//template for creating new objects
 function Item (ctx, gameWidth, gameHeight, type, level) {
   var self = this;
 

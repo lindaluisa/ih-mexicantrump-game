@@ -11,7 +11,7 @@ function Game(gameWindowElement) {
   self.width = window.innerWidth;
   self.height = window.innerHeight;
   self.score = 100; // score
-  self.types = ['brick','brick', 'brick', 'everis', 'everis', 'taco', 'sombrero' , 'ayayay'];
+  self.types = ['brick','brick', 'brick', 'elchapo', 'elchapo', 'taco', 'sombrero' , 'ayayay'];
   self.level = 0;
   self.levelNames = ['Trump', 'Piñata', 'Luchador', 'Mariachi'];
   self.levelThresholds = [300, 1000, 2000];
@@ -75,7 +75,7 @@ function Game(gameWindowElement) {
     self.frames += 1;
     if (self.frames % self.dropRates[self.level] === 0) { //@enhancing 
       var type = getRandomType();
-      self.items.push(new Item(self.ctx, self.width, self.height, type,self.level), new Everis(self.ctx, self.width, self.height, type,self.level)) 
+      self.items.push(new Item(self.ctx, self.width, self.height, type,self.level), new ElChapo(self.ctx, self.width, self.height, type,self.level)) 
     }
 
     // items removed when off-screen or collided
@@ -122,10 +122,10 @@ function Game(gameWindowElement) {
             sound.play()
             self.score = self.score + 201;
           }
-          else if (nthItem.type === 'everis') {
-            var sound = new Audio('./images/audio.mp3');
+          else if (nthItem.type === 'elchapo') {
+            var sound = new Audio('./images/elchapo.mp3');
             sound.play()
-            self.score = self.score + 101;
+            self.score = self.score - 30;
           }
         } 
     })
